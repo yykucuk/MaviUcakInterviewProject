@@ -1,0 +1,44 @@
+﻿@using Entities.Models
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<Etkinlik>
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Başlık</th>
+      <th scope="col">Yer</th>
+      <th scope="col">Zaman</th>
+      <th scope="col">Ücretli mi?</th>
+      <th scope="col">Ücret</th>
+      <th scope="col">Görsel</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach (Etkinlik etkinlik in Model)
+        {
+            <tr>
+                <td>@etkinlik.Baslik</td>
+              <td>@etkinlik.Yer</td>
+                <td>@etkinlik.Zaman</td>
+                <td>@(etkinlik.UcretliUcretsiz? "Ücretli":"Ücretsiz")</td>
+                <td>@(etkinlik.UcretliUcretsiz ? etkinlik.Ucret + "TL" : "")</td>
+                <td>
+                    @if (!string.IsNullOrWhiteSpace(etkinlik.Gorsel))
+                    {
+                        <img style="width:40px;height:40px;border-radius: 50%;" src="/Img/@etkinlik.Gorsel" />
+                    }
+                <td>
+                    <a href="@Url.Action("EditEtkinlik", "Etkinlik", new { id = etkinlik.Id })" class="btn btn-primary">Düzenle</a>
+                </td>
+                <td>
+                    <a href="@Url.Action("DetailEtkinlik", "Etkinlik", new { id = etkinlik.Id })" class="btn btn-primary">Detay</a>
+                </td>
+            </tr>
+        }
+  </tbody>
+</table>

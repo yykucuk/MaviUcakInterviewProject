@@ -1,0 +1,3 @@
+﻿dotnet ef dbcontext scaffold "Server=127.0.0.1;Database=MAVIUCAK_INTERVIEW_PROJECT;User ID=yykucuk;Password=yykucuk;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models
+
+dotnet ef dbcontext scaffold "Server=127.0.0.1;Database=MAVIUCAK_INTERVIEW_PROJECT;User ID=yykucuk;Password=yykucuk;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer --context-dir Data --output-dir Models --force

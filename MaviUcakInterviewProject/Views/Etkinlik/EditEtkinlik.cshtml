@@ -1,0 +1,80 @@
+﻿@using Entities.Models;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Etkinlik
+
+<form action="@Url.Action("EditEtkinlik","Etkinlik")" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label>Başlık</label>
+        <input type="hidden" name="id" class="form-control" value="@Model.Id">
+        <input type="text" name="baslik" class="form-control" placeholder="Başlık" value="@Model.Baslik">
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Yer</label>
+        <input type="text" name="yer" class="form-control" placeholder="Yer" value="@Model.Yer">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="zaman">Zaman</label>
+        <input type="datetime-local" id="zaman" name="zaman" value="@Model.Zaman.ToString("yyyy-MM-ddTHH:mm")">
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Ücretli Ücretsiz</label><br>
+        <input type="radio" name="ucretliUcretsiz" id="ucretliRadio" value="true" @(Model.UcretliUcretsiz ? "checked" : "")> Ücretli
+        <input type="radio" name="ucretliUcretsiz" id="ucretsizRadio" value="false" @(Model.UcretliUcretsiz ? "" : "checked")> Ücretsiz
+    </div>
+    <br>
+    <div class="form-group" id="ucretDiv" style="display: @(Model.UcretliUcretsiz ? "block" : "none");">
+        <label>Ücret</label>
+        <input type="number" name="ucret" class="form-control" placeholder="Ücret" min="0" step="0.01" value="@Model.Ucret">
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Aciklama</label>
+        <div>
+            <textarea id="aciklama" name="aciklama" class="form-control">@Model.Aciklama</textarea>
+        </div>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Görsel</label>
+        <input type="file" name="icon" class="form-control">
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Etkinliği Düzenle</button>
+</form>
+
+
+@section Scripts{
+    <script>
+        <script>
+            tinymce.init({
+                selector: 'textarea#description'
+            });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            // "Ücretli" seçeneği seçildiğinde "Ücret" inputunu göster
+            $("#ucretliRadio").change(function () {
+                if ($(this).is(":checked")) {
+                    $("#ucretDiv").show();
+                }
+            });
+
+            // "Ücretsiz" seçeneği seçildiğinde "Ücret" inputunu gizle
+            $("#ucretsizRadio").change(function () {
+                if ($(this).is(":checked")) {
+                    $("#ucretDiv").hide();
+                }
+            });
+        });
+    </script>
+}

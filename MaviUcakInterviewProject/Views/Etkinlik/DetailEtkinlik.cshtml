@@ -1,0 +1,57 @@
+﻿@using Entities.Models;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@model Etkinlik
+<h1 style="color:blue;"> Detay Bilgiler</h1>
+<div class="form-group">
+    <label style="color: red;">Başlık</label>
+    <input type="hidden" name="id" class="form-control" value="@Model.Id">
+    <h2>@Model.Baslik</h2>
+</div>
+<br>
+<div class="form-group">
+    <label style="color: red;">Yer</label>
+    <p>@Model.Yer</p>
+</div>
+<br>
+<div class="form-group">
+    <label style="color: red;" for="zaman">Zaman</label>
+    <p>@Model.Zaman</p>
+</div>
+<br>
+<div class="form-group">
+    <label style="color: red;">Ücretli Ücretsiz</label><br>
+    <p>@(Model.UcretliUcretsiz ? "Ücretli" : "Ücretsiz")</p>
+</div>
+<br>
+@if (Model.UcretliUcretsiz)
+{
+    <div class="form-group">
+        <label style="color: red;">Ücret</label>
+        <p>@Model.Ucret</p>
+    </div>
+    <br>
+}
+<div class="form-group">
+    <label style="color: red;">Aciklama</label>
+    <div>
+        <p>@Model.Aciklama</p>
+    </div>
+</div>
+
+<div class="form-group">
+    <label style="color: red;">Görsel</label>
+    <div>
+        <img src="/img/@Model.Gorsel" />
+    </div>
+</div>
+
+<br>
+<div class="form-group">
+    <a href="@Url.Action("EtkinlikList", "Etkinlik")" class="btn btn-secondary">Geriye Dön</a>
+</div>

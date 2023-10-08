@@ -1,0 +1,203 @@
+USE [MAVIUCAK_INTERVIEW_PROJECT]
+GO
+/****** Object:  Table [dbo].[Category]    Script Date: 10/8/2023 6:20:08 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Category](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Color] [varchar](10) NULL,
+ CONSTRAINT [PK_Category] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Etkinlik]    Script Date: 10/8/2023 6:20:08 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Etkinlik](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Baslik] [nvarchar](50) NOT NULL,
+	[Yer] [nvarchar](250) NOT NULL,
+	[Zaman] [datetime] NOT NULL,
+	[UcretliUcretsiz] [bit] NOT NULL,
+	[Ucret] [decimal](18, 0) NOT NULL,
+	[Aciklama] [nvarchar](500) NOT NULL,
+	[Gorsel] [varchar](250) NULL,
+ CONSTRAINT [PK_Etkinlik] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Log]    Script Date: 10/8/2023 6:20:08 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Log](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Message] [nvarchar](max) NOT NULL,
+	[MethodName] [nvarchar](150) NOT NULL,
+	[ClassName] [nvarchar](150) NOT NULL,
+	[DateTime] [datetime] NOT NULL,
+ CONSTRAINT [PK_Log] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Project]    Script Date: 10/8/2023 6:20:08 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Project](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](150) NOT NULL,
+	[CategoryId] [int] NOT NULL,
+	[Description] [nvarchar](max) NULL,
+	[IconUrl] [nvarchar](150) NULL,
+	[Progress] [int] NULL,
+ CONSTRAINT [PK_Project] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Role]    Script Date: 10/8/2023 6:20:08 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Role](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Color] [varchar](20) NULL,
+ CONSTRAINT [PK_Role] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[User]    Script Date: 10/8/2023 6:20:08 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[User](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+	[RoleId] [int] NOT NULL,
+	[ProfileImageUrl] [varchar](150) NULL,
+	[Password] [nchar](10) NOT NULL,
+	[LastOnline] [datetime] NULL,
+ CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[Category] ON 
+GO
+INSERT [dbo].[Category] ([Id], [Name], [Color]) VALUES (1, N'In Progress', N'green')
+GO
+INSERT [dbo].[Category] ([Id], [Name], [Color]) VALUES (2, N'Completed', N'#add8e6')
+GO
+INSERT [dbo].[Category] ([Id], [Name], [Color]) VALUES (3, N'Cancelled', N'red')
+GO
+SET IDENTITY_INSERT [dbo].[Category] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Etkinlik] ON 
+GO
+INSERT [dbo].[Etkinlik] ([ID], [Baslik], [Yer], [Zaman], [UcretliUcretsiz], [Ucret], [Aciklama], [Gorsel]) VALUES (2, N'Sonbahar Etkinliði', N'Kocaeli', CAST(N'2023-12-11T00:00:00.000' AS DateTime), 1, CAST(1233 AS Decimal(18, 0)), N'güzel þeyler olacak', N'')
+GO
+INSERT [dbo].[Etkinlik] ([ID], [Baslik], [Yer], [Zaman], [UcretliUcretsiz], [Ucret], [Aciklama], [Gorsel]) VALUES (6, N'Fanta festivali', N'Ýstanbul', CAST(N'2023-10-29T16:34:00.000' AS DateTime), 0, CAST(0 AS Decimal(18, 0)), N'festival var', N'yyk.jpg')
+GO
+SET IDENTITY_INSERT [dbo].[Etkinlik] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Log] ON 
+GO
+INSERT [dbo].[Log] ([Id], [Message], [MethodName], [ClassName], [DateTime]) VALUES (1, N'Value cannot be null. (Parameter ''entity'')', N'DeleteByResult', N'ProjectUserRelationDal', CAST(N'2022-10-23T02:19:55.700' AS DateTime))
+GO
+INSERT [dbo].[Log] ([Id], [Message], [MethodName], [ClassName], [DateTime]) VALUES (2, N'An error occurred while saving the entity changes. See the inner exception for details.', N'CreateByResult', N'ProjectDal', CAST(N'2022-10-23T05:06:08.727' AS DateTime))
+GO
+INSERT [dbo].[Log] ([Id], [Message], [MethodName], [ClassName], [DateTime]) VALUES (3, N'Data is Null. This method or property cannot be called on Null values.', N'GetAll', N'EtkinlikDal', CAST(N'2023-10-08T15:17:03.470' AS DateTime))
+GO
+INSERT [dbo].[Log] ([Id], [Message], [MethodName], [ClassName], [DateTime]) VALUES (4, N'Data is Null. This method or property cannot be called on Null values.', N'GetAll', N'EtkinlikDal', CAST(N'2023-10-08T15:23:52.310' AS DateTime))
+GO
+INSERT [dbo].[Log] ([Id], [Message], [MethodName], [ClassName], [DateTime]) VALUES (5, N'Data is Null. This method or property cannot be called on Null values.', N'GetAll', N'EtkinlikDal', CAST(N'2023-10-08T15:27:20.170' AS DateTime))
+GO
+INSERT [dbo].[Log] ([Id], [Message], [MethodName], [ClassName], [DateTime]) VALUES (6, N'Data is Null. This method or property cannot be called on Null values.', N'GetAll', N'EtkinlikDal', CAST(N'2023-10-08T15:28:03.303' AS DateTime))
+GO
+INSERT [dbo].[Log] ([Id], [Message], [MethodName], [ClassName], [DateTime]) VALUES (7, N'An error occurred while saving the entity changes. See the inner exception for details.', N'CreateByResult', N'EtkinlikDal', CAST(N'2023-10-08T16:28:46.330' AS DateTime))
+GO
+INSERT [dbo].[Log] ([Id], [Message], [MethodName], [ClassName], [DateTime]) VALUES (8, N'An error occurred while saving the entity changes. See the inner exception for details.', N'CreateByResult', N'EtkinlikDal', CAST(N'2023-10-08T16:33:46.230' AS DateTime))
+GO
+INSERT [dbo].[Log] ([Id], [Message], [MethodName], [ClassName], [DateTime]) VALUES (9, N'The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.', N'UpdateByResult', N'EtkinlikDal', CAST(N'2023-10-08T16:50:20.420' AS DateTime))
+GO
+INSERT [dbo].[Log] ([Id], [Message], [MethodName], [ClassName], [DateTime]) VALUES (10, N'The database operation was expected to affect 1 row(s), but actually affected 0 row(s); data may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=527962 for information on understanding and handling optimistic concurrency exceptions.', N'UpdateByResult', N'EtkinlikDal', CAST(N'2023-10-08T16:53:37.347' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[Log] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Project] ON 
+GO
+INSERT [dbo].[Project] ([Id], [Name], [CategoryId], [Description], [IconUrl], [Progress]) VALUES (2, N'Insta Cric Panvel', 1, N'gde', N'project1.png', 20)
+GO
+INSERT [dbo].[Project] ([Id], [Name], [CategoryId], [Description], [IconUrl], [Progress]) VALUES (4, N'Igo WordPress Theme', 2, N'dasd', N'project2.png', 40)
+GO
+INSERT [dbo].[Project] ([Id], [Name], [CategoryId], [Description], [IconUrl], [Progress]) VALUES (5, N'Niche Site', 2, N'dsdsd', N'project3.png', 50)
+GO
+INSERT [dbo].[Project] ([Id], [Name], [CategoryId], [Description], [IconUrl], [Progress]) VALUES (6, N'Shell Corp', 1, N'fsdfsfsdf', N'project4.png', 70)
+GO
+INSERT [dbo].[Project] ([Id], [Name], [CategoryId], [Description], [IconUrl], [Progress]) VALUES (8, N'Accounts', 3, N'tert', N'project5.png', 30)
+GO
+SET IDENTITY_INSERT [dbo].[Project] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Role] ON 
+GO
+INSERT [dbo].[Role] ([Id], [Name], [Color]) VALUES (1, N'Admin', N'green')
+GO
+INSERT [dbo].[Role] ([Id], [Name], [Color]) VALUES (2, N'User', N'blue')
+GO
+INSERT [dbo].[Role] ([Id], [Name], [Color]) VALUES (3, N'Team', N'red')
+GO
+INSERT [dbo].[Role] ([Id], [Name], [Color]) VALUES (4, N'Worker', N'purple')
+GO
+INSERT [dbo].[Role] ([Id], [Name], [Color]) VALUES (5, N'Client', N'pink')
+GO
+SET IDENTITY_INSERT [dbo].[Role] OFF
+GO
+SET IDENTITY_INSERT [dbo].[User] ON 
+GO
+INSERT [dbo].[User] ([Id], [Name], [RoleId], [ProfileImageUrl], [Password], [LastOnline]) VALUES (1, N'Yasin', 1, N'yyk.jpg', N'123       ', CAST(N'2023-10-08T16:54:17.637' AS DateTime))
+GO
+INSERT [dbo].[User] ([Id], [Name], [RoleId], [ProfileImageUrl], [Password], [LastOnline]) VALUES (2, N'Nimet', 2, N'nimet.jpg', N'123       ', CAST(N'2022-11-06T15:24:51.613' AS DateTime))
+GO
+INSERT [dbo].[User] ([Id], [Name], [RoleId], [ProfileImageUrl], [Password], [LastOnline]) VALUES (3, N'Sally Bromly', 1, N'person2.jpg', N'123       ', NULL)
+GO
+INSERT [dbo].[User] ([Id], [Name], [RoleId], [ProfileImageUrl], [Password], [LastOnline]) VALUES (4, N'Admin User', 1, N'person1.jpg', N'123       ', NULL)
+GO
+INSERT [dbo].[User] ([Id], [Name], [RoleId], [ProfileImageUrl], [Password], [LastOnline]) VALUES (5, N'Sophie Yang', 4, N'person3.jpg', N'123       ', NULL)
+GO
+INSERT [dbo].[User] ([Id], [Name], [RoleId], [ProfileImageUrl], [Password], [LastOnline]) VALUES (7, N'Bob Dilion', 3, N'person4.jpg', N'123       ', NULL)
+GO
+INSERT [dbo].[User] ([Id], [Name], [RoleId], [ProfileImageUrl], [Password], [LastOnline]) VALUES (8, N'Isabel Smith', 5, N'person5.jpg', N'123       ', NULL)
+GO
+SET IDENTITY_INSERT [dbo].[User] OFF
+GO
+ALTER TABLE [dbo].[Project]  WITH CHECK ADD  CONSTRAINT [FK_Project_Category] FOREIGN KEY([CategoryId])
+REFERENCES [dbo].[Category] ([Id])
+GO
+ALTER TABLE [dbo].[Project] CHECK CONSTRAINT [FK_Project_Category]
+GO
+ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [FK_User_Role] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[Role] ([Id])
+GO
+ALTER TABLE [dbo].[User] CHECK CONSTRAINT [FK_User_Role]
+GO

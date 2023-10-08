@@ -1,4 +1,4 @@
-namespace MaviUcakInterviewProject.Models
+namespace Models
 {
     public class ErrorViewModel
     {
